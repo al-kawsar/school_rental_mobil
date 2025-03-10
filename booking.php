@@ -51,45 +51,45 @@ $isi = $koneksi->query("SELECT * FROM mobil WHERE id_mobil = '$id'")->fetch();
             </div>
         </div>
         <div class="col-sm-8">
-           <div class="card">
-             <div class="card-body">
-                 <form method="post" action="koneksi/proses.php?id=booking">
-                    <div class="form-group">
-                      <label for="">KTP</label>
-                      <input type="text" name="ktp" id="" required class="form-control" placeholder="KTP / NIK Anda">
-                  </div>
-                  <div class="form-group">
-                      <label for="">Nama</label>
-                      <input type="text" name="nama" id="" required class="form-control" placeholder="Nama Anda">
-                  </div>
-                  <div class="form-group">
-                      <label for="">Alamat</label>
-                      <input type="text" name="alamat" id="" required class="form-control" placeholder="Alamat">
-                  </div>
-                  <div class="form-group">
-                      <label for="">Telepon</label>
-                      <input type="text" name="no_tlp" id="" required class="form-control" placeholder="Telepon">
-                  </div>
-                  <div class="form-group">
-                      <label for="">Tanggal Sewa</label>
-                      <input type="date" name="tanggal" id="" required class="form-control" placeholder="Nama Anda">
-                  </div>
-                  <div class="form-group">
-                      <label for="">Lama Sewa</label>
-                      <input type="number" name="lama_sewa" id="" required class="form-control" placeholder="Lama Sewa">
-                  </div>
-                  <input type="hidden" value="<?php echo $_SESSION['USER']['id_login'];?>" name="id_login">
-                  <input type="hidden" value="<?php echo $isi['id_mobil'];?>" name="id_mobil">
-                  <input type="hidden" value="<?php echo $isi['harga'];?>" name="total_harga">
-                  <hr/>
-                  <?php if($isi['status'] == 'Tersedia'){?>
-                    <button type="submit" class="btn btn-primary float-right">Booking Now</button>
-                <?php }else{?>
-                    <button type="submit" class="btn btn-danger float-right" disabled>Booking Now</button>
-                <?php }?>
-            </form>
-        </div>
+         <div class="card">
+           <div class="card-body">
+               <form method="post" action="koneksi/proses.php?id=booking">
+                <div class="form-group">
+                  <label for="">KTP</label>
+                  <input type="text" name="ktp" id="" required class="form-control" placeholder="KTP / NIK Anda">
+              </div>
+              <div class="form-group">
+                  <label for="">Nama</label>
+                  <input type="text" name="nama" id="" required class="form-control" placeholder="Nama Anda">
+              </div>
+              <div class="form-group">
+                  <label for="">Alamat</label>
+                  <input type="text" name="alamat" id="" required class="form-control" placeholder="Alamat">
+              </div>
+              <div class="form-group">
+                  <label for="">Telepon</label>
+                  <input type="text" name="no_tlp" id="" required class="form-control" placeholder="Telepon">
+              </div>
+              <div class="form-group">
+                  <label for="">Tanggal Sewa</label>
+                  <input type="date" name="tanggal" id="" required class="form-control" placeholder="Nama Anda">
+              </div>
+              <div class="form-group">
+                  <label for="">Lama Sewa</label>
+                  <input type="number" name="lama_sewa" id="" required class="form-control" placeholder="Lama Sewa">
+              </div>
+              <input type="hidden" value="<?php echo $_SESSION['USER']['id_user'];?>" name="id_user">
+              <input type="hidden" value="<?php echo $isi['id_mobil'];?>" name="id_mobil">
+              <input type="hidden" value="<?php echo $isi['harga'];?>" name="total_harga">
+              <hr/>
+              <?php if($isi['status'] == 'Tersedia'){?>
+                <button type="submit" class="btn btn-primary float-right">Booking Now</button>
+            <?php }else{?>
+                <button type="submit" class="btn btn-danger float-right" disabled>Booking Now</button>
+            <?php }?>
+        </form>
     </div>
+</div>
 </div>
 </div>
 </div>
