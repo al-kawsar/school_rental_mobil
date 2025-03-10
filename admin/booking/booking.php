@@ -17,15 +17,15 @@ try {
       $id = strip_tags($_GET['id']);
       $sql = "SELECT mobil.merk, booking.* FROM booking
       JOIN mobil ON booking.id_mobil = mobil.id_mobil
-      WHERE id_login = :id
+      WHERE id_user = :id
       ORDER BY id_booking DESC
       LIMIT :limit OFFSET :offset";
       $row = $koneksi->prepare($sql);
       $row->bindValue(':id', $id, PDO::PARAM_INT);
   } else {
-    $sql = "SELECT login.nama_pengguna as nama_pengguna ,mobil.merk, mobil.status, booking.* FROM booking
+    $sql = "SELECT users.nama_pengguna as nama_pengguna ,mobil.merk, mobil.status, booking.* FROM booking
     JOIN mobil ON booking.id_mobil = mobil.id_mobil
-    JOIN login ON booking.id_login = login.id_login
+    JOIN users ON booking.id_user = users.id_user
     ORDER BY id_booking DESC
     LIMIT :limit OFFSET :offset";
     $row = $koneksi->prepare($sql);
