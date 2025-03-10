@@ -17,7 +17,7 @@
     $user = $_POST['user'];
     $pass = $_POST['pass'];
 
-    $row = $koneksi->prepare("SELECT * FROM login WHERE username = ? AND password = md5(?)");
+    $row = $koneksi->prepare("SELECT * FROM users WHERE username = ? AND password = md5(?)");
     
     $row->execute(array($user,$pass));
     
@@ -54,7 +54,7 @@ if($_GET['id'] == 'daftar')
     $data[] = md5($_POST['pass']);
     $data[] = 'pengguna';
 
-    $row = $koneksi->prepare("SELECT * FROM login WHERE username = ?");
+    $row = $koneksi->prepare("SELECT * FROM users WHERE username = ?");
     
     $row->execute(array($_POST['user']));
     
@@ -67,7 +67,7 @@ if($_GET['id'] == 'daftar')
     else
     {
 
-        $sql = "INSERT INTO `login`(`nama_pengguna`, `username`, `password`, `level`)
+        $sql = "INSERT INTO `users`(`nama_pengguna`, `username`, `password`, `level`)
         VALUES (?,?,?,?)";
         $row = $koneksi->prepare($sql);
         $row->execute($data);
@@ -85,7 +85,7 @@ if($_GET['id'] == 'booking')
     $total_harga = $total+$unik;
 
     $data[] = time();
-    $data[] = $_POST['id_login'];
+    $data[] = $_POST['id_user'];
     $data[] = $_POST['id_mobil'];
     $data[] = $_POST['ktp'];
     $data[] = $_POST['nama'];
@@ -98,7 +98,7 @@ if($_GET['id'] == 'booking')
     $data[] = date('Y-m-d');
 
     $sql = "INSERT INTO booking (kode_booking, 
-        id_login, 
+        id_user,
         id_mobil, 
         ktp, 
         nama, 
