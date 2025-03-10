@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `booking` (
   `id_booking` int(11) NOT NULL,
   `kode_booking` varchar(255) NOT NULL,
-  `id_login` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `id_mobil` int(11) NOT NULL,
   `ktp` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE `booking` (
 -- Dumping data for table `booking`
 --
 
-INSERT INTO `booking` (`id_booking`, `kode_booking`, `id_login`, `id_mobil`, `ktp`, `nama`, `alamat`, `no_tlp`, `tanggal`, `lama_sewa`, `total_harga`, `konfirmasi_pembayaran`, `tgl_input`) VALUES
+INSERT INTO `booking` (`id_booking`, `kode_booking`, `id_user`, `id_mobil`, `ktp`, `nama`, `alamat`, `no_tlp`, `tanggal`, `lama_sewa`, `total_harga`, `konfirmasi_pembayaran`, `tgl_input`) VALUES
 (1, '1576329294', 3, 5, '231423123', 'Krisna', 'Bekasi', '08132312321', '2019-12-28', 2, 400000, 'Pembayaran di terima', '2019-12-14'),
 (2, '1576671989', 3, 5, '231423', 'Krisna Waskita', 'Bekasi Ujung Harapan', '082391273127', '2019-12-20', 2, 400525, 'Pembayaran di terima', '2019-12-18'),
 (3, '1642998828', 3, 5, '1283821832813', 'Krisna', 'Bekasi', '089618173609', '2022-01-26', 4, 800743, 'Pembayaran di terima', '2022-01-24');
@@ -78,11 +78,11 @@ INSERT INTO `infoweb` (`id`, `nama_rental`, `telp`, `alamat`, `email`, `no_rek`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `login` (
-  `id_login` int(11) NOT NULL,
+CREATE TABLE `users` (
+  `id_user` int(11) NOT NULL,
   `nama_pengguna` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -90,10 +90,10 @@ CREATE TABLE `login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `login`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `login` (`id_login`, `nama_pengguna`, `username`, `password`, `level`) VALUES
+INSERT INTO `users` (`id_user`, `nama_pengguna`, `username`, `password`, `level`) VALUES
 (1, 'Alkawsar', 'admin', '202cb962ac59075b964b07152d234b70', 'admin'),
 (3, 'Abd Rahman', 'bom', '202cb962ac59075b964b07152d234b70', 'pengguna');
 
@@ -171,10 +171,10 @@ ALTER TABLE `booking`
 ADD PRIMARY KEY (`id_booking`);
 
 --
--- Indexes for table `login`
+-- Indexes for table `users`
 --
-ALTER TABLE `login`
-ADD PRIMARY KEY (`id_login`);
+ALTER TABLE `users`
+ADD PRIMARY KEY (`id_user`);
 
 --
 -- Indexes for table `mobil`
@@ -205,10 +205,10 @@ ALTER TABLE `booking`
 MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `login`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `login`
-MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `users`
+MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `mobil`
@@ -237,7 +237,7 @@ COMMIT;
 
 
 -- Dummy data for login table (users)
-INSERT INTO `login` (`nama_pengguna`, `username`, `password`, `level`) VALUES
+INSERT INTO `users` (`nama_pengguna`, `username`, `password`, `level`) VALUES
 ('Budi Santoso', 'budi1', '202cb962ac59075b964b07152d234b70', 'pengguna'),
 ('Dewi Lestari', 'dewi2', '202cb962ac59075b964b07152d234b70', 'pengguna'),
 ('Agus Pratama', 'agus3', '202cb962ac59075b964b07152d234b70', 'pengguna'),
@@ -255,7 +255,7 @@ INSERT INTO `mobil` (`no_plat`, `merk`, `harga`, `deskripsi`, `status`, `gambar`
 ('B 1122 XYZ', 'Toyota Fortuner', 750000, 'SUV premium 7 kursi dengan transmisi otomatis, AC, sunroof, dan fitur mewah lainnya.', 'Tersedia', 'fortuner.jpg');
 
 -- Dummy data for booking table
-INSERT INTO `booking` (`kode_booking`, `id_login`, `id_mobil`, `ktp`, `nama`, `alamat`, `no_tlp`, `tanggal`, `lama_sewa`, `total_harga`, `konfirmasi_pembayaran`, `tgl_input`) VALUES
+INSERT INTO `booking` (`kode_booking`, `id_user`, `id_mobil`, `ktp`, `nama`, `alamat`, `no_tlp`, `tanggal`, `lama_sewa`, `total_harga`, `konfirmasi_pembayaran`, `tgl_input`) VALUES
 ('1676543210', 4, 8, '3275012345678901', 'Maya Sari', 'Jl. Merdeka No. 45, Jakarta Selatan', '081234567890', '2023-01-15', 3, 2250000, 'Pembayaran di terima', '2023-01-10'),
 ('1676543211', 5, 7, '3275123456789012', 'Joko Widodo', 'Jl. Pahlawan No. 17, Jakarta Pusat', '082345678901', '2023-01-20', 2, 900000, 'Pembayaran di terima', '2023-01-15'),
 ('1676543212', 6, 6, '3275234567890123', 'Budi Santoso', 'Jl. Sudirman No. 25, Jakarta Pusat', '083456789012', '2023-01-25', 4, 1280000, 'Pembayaran di terima', '2023-01-20'),
