@@ -16,8 +16,8 @@ if (empty($_SESSION['USER']) || $_SESSION['USER']['level'] !== 'admin') {
             exit;
         }
 // Get admin details
-        $id_login = $_SESSION['USER']['id_login'];
-        $stmt = $koneksi->prepare("SELECT * FROM login WHERE id_login = ?");
+        $id_login = $_SESSION['USER']['id_user'];
+        $stmt = $koneksi->prepare("SELECT * FROM users WHERE id_user = ?");
         $stmt->execute([$id_login]);
         $admin = $stmt->fetch();
 // Security: regenerate session ID periodically to prevent session fixation
