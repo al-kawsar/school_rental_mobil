@@ -11,12 +11,12 @@ $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 
-$sql = "SELECT * FROM login WHERE level = 'Pengguna' ORDER BY id_login DESC LIMIT $limit OFFSET $offset";
+$sql = "SELECT * FROM users WHERE level = 'Pengguna' ORDER BY id_user DESC LIMIT $limit OFFSET $offset";
 $row = $koneksi->prepare($sql);
 $row->execute();
 $hasil = $row->fetchAll(PDO::FETCH_OBJ);
 
-$totalQuery = $koneksi->prepare("SELECT COUNT(*) as total FROM login WHERE level = 'Pengguna'");
+$totalQuery = $koneksi->prepare("SELECT COUNT(*) as total FROM users WHERE level = 'Pengguna'");
 $totalQuery->execute();
 $totalData = $totalQuery->fetch(PDO::FETCH_OBJ)->total;
 $totalPages = ceil($totalData / $limit);
@@ -62,7 +62,7 @@ $totalPages = ceil($totalData / $limit);
                                     <td><?= $r->nama_pengguna; ?></td>
                                     <td><?= $r->username; ?></td>
                                     <td class="text-center">
-                                        <a href="<?= $url; ?>admin/booking/booking.php?id=<?= $r->id_login; ?>" class="btn btn-primary btn-sm rounded-pill">
+                                        <a href="<?= $url; ?>admin/booking/booking.php?id=<?= $r->id_user; ?>" class="btn btn-primary btn-sm rounded-pill">
                                             <i class="fas fa-info-circle me-1"></i> Detail
                                         </a>
                                     </td>
