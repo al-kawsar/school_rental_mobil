@@ -35,54 +35,54 @@ $isi = $koneksi->query("SELECT * FROM mobil WHERE id_mobil = '$id'")->fetch();
 
                     <center><h3>Pembayaran Dapat Melalui :</h3>
                         <hr/>
-                        <p> BRI 2132131246 A/N Rental Dirga </p></center>
+                        <p> BRI 2132131246 A/N Andi Muh Raihan Alkawsar </p></center>
 
                     </div>
                 </div>
             </div>
             <div class="col-sm-8">
-               <div class="card">
-                 <div class="card-body">
-                     <form method="post" action="koneksi/proses.php?id=konfirmasi">
-                        <table class="table">
-                            <tr>
-                                <td>Kode Booking  </td>
-                                <td> :</td>
-                                <td><?php echo $hasil['kode_booking'];?></td>
-                            </tr>
-                            <tr>
-                                <td>No Rekening   </td>
-                                <td> :</td>
-                                <td><input type="text" name="no_rekening" required class="form-control"></td>
-                            </tr>
-                            <tr>
-                                <td>Atas Nama </td>
-                                <td> :</td>
-                                <td><input type="text" name="nama" required class="form-control"></td>
-                            </tr>
-                            <tr>
-                                <td>Nominal  </td>
-                                <td> :</td>
-                                <td><input type="text" name="nominal" required class="form-control"></td>
-                            </tr>
-                            <tr>
-                                <td>Tanggal  Transfer</td>
-                                <td> :</td>
-                                <td><input type="date" name="tgl" required class="form-control"></td>
-                            </tr>
-                            <tr>
-                                <td>Total yg Harus di Bayar </td>
-                                <td> :</td>
-                                <td>Rp. <?php echo number_format($hasil['total_harga']);?></td>
-                            </tr>
-                        </table>
-                        <input type="hidden" name="id_booking" value="<?php echo $hasil['id_booking'];?>">
-                        <button type="submit" class="btn btn-primary float-right">Kirim</button>
-                    </form>
-                </div>
-            </div> 
-        </div>
+             <div class="card">
+               <div class="card-body">
+                   <form method="post" action="koneksi/proses.php?id=konfirmasi">
+                    <table class="table">
+                        <tr>
+                            <td>Kode Booking  </td>
+                            <td> :</td>
+                            <td><?php echo $hasil['kode_booking'];?></td>
+                        </tr>
+                        <tr>
+                            <td>No Rekening   </td>
+                            <td> :</td>
+                            <td><input type="text" name="no_rekening" required class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <td>Atas Nama </td>
+                            <td> :</td>
+                            <td><input type="text" name="nama" required class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <td>Nominal  </td>
+                            <td> :</td>
+                            <td><input type="text" name="nominal" required class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal  Transfer</td>
+                            <td> :</td>
+                            <td><input type="date" name="tgl" required class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <td>Total yg Harus di Bayar </td>
+                            <td> :</td>
+                            <td>Rp. <?php echo number_format($hasil['total_harga']);?></td>
+                        </tr>
+                    </table>
+                    <input type="hidden" name="id_booking" value="<?php echo $hasil['id_booking'];?>">
+                    <button type="submit" class="btn btn-primary float-right">Kirim</button>
+                </form>
+            </div>
+        </div> 
     </div>
+</div>
 </div>
 <br>
 <br>
