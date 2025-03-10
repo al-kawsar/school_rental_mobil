@@ -25,8 +25,8 @@ if(!empty($_POST['nama_pengguna']))
     $data[] =  htmlspecialchars($_POST["nama_pengguna"]);
     $data[] =  htmlspecialchars($_POST["username"]);
     $data[] =  md5($_POST["password"]);
-    $data[] =  $_SESSION['USER']['id_login'];
-    $sql = "UPDATE login SET nama_pengguna = ?, username = ?, password = ? WHERE id_login = ? ";
+    $data[] =  $_SESSION['USER']['id_user'];
+    $sql = "UPDATE users SET nama_pengguna = ?, username = ?, password = ? WHERE id_user = ? ";
     $row = $koneksi->prepare($sql);
     $row->execute($data);
     echo '<script>alert("Update Data Profil Berhasil !");window.location="profil.php"</script>';
@@ -43,7 +43,7 @@ if(!empty($_POST['nama_pengguna']))
                     <form action="" method="post">
                         <?php
                         $id =  $_SESSION["USER"]["id_login"];
-                        $sql = "SELECT * FROM login WHERE id_login = ?";
+                        $sql = "SELECT * FROM users WHERE id_user = ?";
                         $row = $koneksi->prepare($sql);
                         $row->execute(array($id));
                         $edit_profil = $row->fetch(PDO::FETCH_OBJ);
