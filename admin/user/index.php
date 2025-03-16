@@ -1,5 +1,5 @@
 <?php
-require '../../koneksi/koneksi.php';
+require_once '../../koneksi/koneksi.php';
 $title_web = 'User';
 include '../header.php';
 if(empty($_SESSION['USER'])) {
