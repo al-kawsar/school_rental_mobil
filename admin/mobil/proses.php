@@ -1,13 +1,11 @@
 <?php
-require '../../koneksi/koneksi.php';
+require_once '../../koneksi/koneksi.php';
 $title_web = 'Tambah Mobil';
 include '../header.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
-echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
 
 function showAlert($message, $redirect = "tambah.php") {
     echo "<script>
