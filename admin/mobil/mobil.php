@@ -1,8 +1,8 @@
 <?php
-require '../../koneksi/koneksi.php';
+require_once '../../koneksi/koneksi.php';
 session_start();
 
-if(empty($_SESSION['USER'])) {
+if (empty($_SESSION['USER'])) {
     header("Location: ../login.php");
     exit;
 }
@@ -11,8 +11,8 @@ $title_web = 'Daftar Mobil';
 include '../header.php';
 
 // Pagination setup
-$limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 10;
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 
 $sql = "SELECT * FROM mobil ORDER BY updated_at DESC LIMIT :limit OFFSET :offset";
@@ -37,7 +37,8 @@ $totalPages = ceil($totalData / $limit);
                         <span class="input-group-text bg-light border-end-0">
                             <i class="fas fa-search text-muted"></i>
                         </span>
-                        <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Cari mobil...">
+                        <input type="text" id="searchInput" class="form-control border-start-0"
+                        placeholder="Cari mobil...">
                     </div>
                 </div>
                 <div class="col-md-6 text-md-end mt-3 mt-md-0">
@@ -62,25 +63,29 @@ $totalPages = ceil($totalData / $limit);
                     <tbody>
                         <?php if ($hasil): ?>
                             <?php $no = $offset + 1; ?>
-                            <?php foreach($hasil as $isi): ?>
+                            <?php foreach ($hasil as $isi): ?>
                                 <tr class="car-row">
                                     <td class="text-center"><?= $no++; ?></td>
-                                    <td><img src="../../assets/image/<?= htmlspecialchars($isi->gambar); ?>" class="img-fluid" style="width:100%;height: 130px; object-fit: cover; object-position: center;"></td>
-                                    <td><?= htmlspecialchars($isi->merk); ?></td>
-                                    <td><?= htmlspecialchars($isi->no_plat); ?></td>
-                                    <td><?= 'Rp ' . number_format($isi->harga, 0, ',', '.'); ?></td>
-                                    <td>
-                                        <span class="badge <?php echo ($isi->status == 'Tersedia') ? 'bg-success' : 'bg-danger'; ?>">
+                                    <td><img src="../../assets/image/<?= htmlspecialchars($isi->gambar); ?>" class="img-fluid"
+                                        style="width:100%;height: 130px; object-fit: cover; object-position: center;"></td>
+                                        <td><?= htmlspecialchars($isi->merk); ?></td>
+                                        <td><?= htmlspecialchars($isi->no_plat); ?></td>
+                                        <td><?= 'Rp ' . number_format($isi->harga, 0, ',', '.'); ?></td>
+                                        <td>
+                                            <span
+                                            class="badge <?php echo ($isi->status == 'Tersedia') ? 'bg-success' : 'bg-danger'; ?>">
                                             <?php echo htmlspecialchars($isi->status); ?>
                                         </span>
                                     </td>
                                     <td><?= htmlspecialchars($isi->deskripsi); ?></td>
                                     <td class="text-center">
                                         <div class="d-flex gap-2 h-100">
-                                            <a href="edit.php?id=<?= $isi->id_mobil; ?>" class="btn btn-primary btn-sm rounded-pill">
+                                            <a href="edit.php?id=<?= $isi->id_mobil; ?>"
+                                                class="btn btn-primary btn-sm rounded-pill">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a onclick="confirmDelete('<?= $isi->id_mobil; ?>', '<?= $isi->gambar; ?>')" class="btn btn-danger btn-sm rounded-pill">
+                                            <a onclick="confirmDelete('<?= $isi->id_mobil; ?>', '<?= $isi->gambar; ?>')"
+                                                class="btn btn-danger btn-sm rounded-pill">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </div>
@@ -131,37 +136,48 @@ $totalPages = ceil($totalData / $limit);
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('searchInput').addEventListener('keyup', function() {
-            const searchValue = this.value.toLowerCase();
-            document.querySelectorAll('.car-row').forEach(row => {
-                const merk = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
-                const noPlat = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
-                row.style.display = (merk.includes(searchValue) || noPlat.includes(searchValue)) ? '' : 'none';
-            });
-        });
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set user count
+    const searchInput = document.getElementById('searchInput');
 
-        document.getElementById('rowsPerPage').addEventListener('change', function() {
-            window.location.href = "?page=1&limit=" + this.value;
+    searchInput.addEventListener('keyup', function() {
+        const searchValue = this.value.toLowerCase();
+        const rows = document.querySelectorAll('.user-row');
+
+        rows.forEach(row => {
+            const name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            const username = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+            if (name.includes(searchValue) || username.includes(searchValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
         });
     });
 
-    function confirmDelete(id, gambar) {
-        Swal.fire({
-            title: 'Apakah Anda yakin?',
-            text: "Mobil ini akan dihapus secara permanen!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Ya, hapus!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "proses.php?aksi=hapus&id=" + id + "&gambar=" + gambar;
-            }
-        });
-    }
+    document.getElementById('rowsPerPage').addEventListener('change', function() {
+        window.location.href = "?page=1&limit=" + this.value;
+    });
+
+});
+
+  function confirmDelete(id, gambar) {
+    Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: "Mobil ini akan dihapus secara permanen!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "proses.php?aksi=hapus&id=" + id + "&gambar=" + gambar;
+        }
+    });
+}
 </script>
 
 <?php include '../footer.php'; ?>
