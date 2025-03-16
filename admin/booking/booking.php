@@ -1,6 +1,6 @@
 <?php
 
-require '../../koneksi/koneksi.php';
+require_once '../../koneksi/koneksi.php';
 $title_web = 'Daftar Booking';
 include '../header.php';
 
@@ -15,9 +15,10 @@ $offset = ($page - 1) * $limit;
 try {
     if (!empty($_GET['id'])) {
       $id = strip_tags($_GET['id']);
-      $sql = "SELECT mobil.merk, booking.* FROM booking
+      $sql = "SELECT users.nama_pengguna as nama_pengguna ,mobil.merk, mobil.status, booking.* FROM booking
       JOIN mobil ON booking.id_mobil = mobil.id_mobil
-      WHERE id_user = :id
+      JOIN users ON booking.id_user = users.id_user
+      WHERE booking.id_user = :id
       ORDER BY id_booking DESC
       LIMIT :limit OFFSET :offset";
       $row = $koneksi->prepare($sql);
