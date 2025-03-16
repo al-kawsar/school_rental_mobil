@@ -1,25 +1,25 @@
 <?php
-/*
-  | Source Code Aplikasi Rental Mobil PHP & MySQL
-  | 
-  | @package   : rental_mobil
-  | @file	   : bayar.php 
-  | @author    : alkawsar / Andi Muh Raihan Alkawsar
-  | @copyright : Copyright (c) 2017-2021 Codekop.com (https://www.codekop.com)
-  | @blog      : https://www.codekop.com/products/source-code-aplikasi-rental-mobil-php-mysql-7.html 
-  | 
-  | 
-  | 
-  | 
- */
-  require '../../koneksi/koneksi.php';
-  $title_web = 'Konfirmasi';
-  include '../header.php';
-  session_start();
-  if(empty($_SESSION['USER']))
-  {
-    echo '<script>alert("login dulu");window.location="index.php"</script>';
+
+require_once '../../koneksi/koneksi.php';
+$title_web = 'Konfirmasi';
+include '../header.php';
+session_start();
+if (empty($_SESSION['USER'])) {
+    echo "
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    <script>
+    Swal.fire({
+        icon: 'warning',
+        title: 'Akses Ditolak!',
+        text: 'Silakan login terlebih dahulu!',
+        showConfirmButton: true
+        }).then(() => {
+            window.location='index.php';
+            });
+            </script>";
+    exit;
 }
+
 $kode_booking = $_GET['id'];
 $hasil = $koneksi->query("SELECT * FROM booking WHERE kode_booking = '$kode_booking'")->fetch();
 
@@ -42,138 +42,142 @@ $isi = $koneksi->query("SELECT * FROM mobil WHERE id_mobil = '$id'")->fetch();
                     <h5> Detail Pembayaran</h5>
                 </div>
                 <div class="card-body">
-                    <?php if($c > 0){?>
+                    <?php if ($c > 0) { ?>
                         <table class="table">
                             <tr>
                                 <td>No Rekening</td>
                                 <td> :</td>
-                                <td><?= $hsl['no_rekening'];?></td>
+                                <td><?= $hsl['no_rekening']; ?></td>
                             </tr>
                             <tr>
                                 <td>Atas Nama </td>
                                 <td> :</td>
-                                <td><?= $hsl['nama_rekening'];?></td>
+                                <td><?= $hsl['nama_rekening']; ?></td>
                             </tr>
                             <tr>
-                                <td>Nominal  </td>
+                                <td>Nominal </td>
                                 <td> :</td>
-                                <td>Rp. <?= number_format($hsl['nominal']);?></td>
+                                <td>Rp. <?= number_format($hsl['nominal']); ?></td>
                             </tr>
                             <tr>
-                                <td>Tgl  Transfer</td>
+                                <td>Tgl Transfer</td>
                                 <td> :</td>
-                                <td><?= $hsl['tanggal'];?></td>
+                                <td><?= $hsl['tanggal']; ?></td>
                             </tr>
                         </table>
-                    <?php }else{?>
+                    <?php } else { ?>
                         <h4>Belum di bayar</h4>
-                    <?php }?>
+                    <?php } ?>
                 </div>
             </div>
-            <br/>
+            <br />
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title"><?php echo $isi['merk'];?></h5>
+                    <h5 class="card-title"><?php echo $isi['merk']; ?></h5>
                 </div>
                 <ul class="list-group list-group-flush">
 
-                    <?php if($isi['status'] == 'Tersedia'){?>
+                    <?php if ($isi['status'] == 'Tersedia') { ?>
 
                         <li class="list-group-item bg-primary text-white">
                             <i class="fa fa-check"></i> Tersedia
                         </li>
 
-                    <?php }else{?>
+                    <?php } else { ?>
 
                         <li class="list-group-item bg-danger text-white">
                             <i class="fa fa-close"></i> Tidak Tersedia
                         </li>
 
-                    <?php }?>
+                    <?php } ?>
 
 
                     <li class="list-group-item bg-info text-white"><i class="fa fa-check"></i> Gratis E-toll 50k</li>
                     <li class="list-group-item bg-dark text-white">
-                        <i class="fa fa-money"></i> Rp. <?php echo number_format($isi['harga']);?>/ hari
+                        <i class="fa fa-money"></i> Rp. <?php echo number_format($isi['harga']); ?>/ hari
                     </li>
                 </ul>
                 <div class="card-footer">
-                    <a href="<?php echo $url;?>admin/peminjaman/peminjaman.php?id=<?php echo $hasil['kode_booking'];?>"
+                    <a href="<?php echo $url; ?>admin/peminjaman/peminjaman.php?id=<?php echo $hasil['kode_booking']; ?>"
                         class="btn btn-success btn-md">Ubah Status Peminjaman</a>
-                    </div>
                 </div>
             </div>
-            <div class="col-sm-8">
-             <div class="card">
+        </div>
+        <div class="col-sm-8">
+            <div class="card">
                 <div class="card-header">
                     <h5> Detail booking</h5>
                 </div>
                 <div class="card-body">
-                   <form method="post" action="proses.php?id=konfirmasi">
-                    <table class="table">
-                        <tr>
-                            <td>Kode Booking  </td>
-                            <td> :</td>
-                            <td><?php echo $hasil['kode_booking'];?></td>
-                        </tr>
-                        <tr>
-                            <td>KTP  </td>
-                            <td> :</td>
-                            <td><?php echo $hasil['ktp'];?></td>
-                        </tr>
-                        <tr>
-                            <td>Nama  </td>
-                            <td> :</td>
-                            <td><?php echo $hasil['nama'];?></td>
-                        </tr>
-                        <tr>
-                            <td>telepon  </td>
-                            <td> :</td>
-                            <td><?php echo $hasil['no_tlp'];?></td>
-                        </tr>
-                        <tr>
-                            <td>Tanggal Sewa </td>
-                            <td> :</td>
-                            <td><?php echo $hasil['tanggal'];?></td>
-                        </tr>
-                        <tr>
-                            <td>Lama Sewa </td>
-                            <td> :</td>
-                            <td><?php echo $hasil['lama_sewa'];?> hari</td>
-                        </tr>
-                        <tr>
-                            <td>Total Harga </td>
-                            <td> :</td>
-                            <td>Rp. <?php echo number_format($hasil['total_harga']);?></td>
-                        </tr>
-                        <tr>
-                            <td>Status </td>
-                            <td> :</td>
-                            <td>
-                                <select class="form-control" name="status">
-                                    <option <?php if($hasil['konfirmasi_pembayaran'] == 'Sedang di proses'){echo 'selected';}?>>
-                                        Sedang di proses
-                                    </option>
-                                    <option <?php if($hasil['konfirmasi_pembayaran'] == 'Pembayaran di terima'){echo 'selected';}?>>
-                                        Pembayaran di terima
-                                    </option>
-                                </select>    
-                            </td>
-                        </tr>
-                    </table>
-                    <input type="hidden" name="id_booking" value="<?php echo $hasil['id_booking'];?>">
-                    <button type="submit" class="btn btn-primary float-right">
-                        Ubah Status
-                    </button>
-                </form>
+                    <form method="post" action="proses.php?id=konfirmasi">
+                        <table class="table">
+                            <tr>
+                                <td>Kode Booking </td>
+                                <td> :</td>
+                                <td><?php echo $hasil['kode_booking']; ?></td>
+                            </tr>
+                            <tr>
+                                <td>KTP </td>
+                                <td> :</td>
+                                <td><?php echo $hasil['ktp']; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Nama </td>
+                                <td> :</td>
+                                <td><?php echo $hasil['nama']; ?></td>
+                            </tr>
+                            <tr>
+                                <td>telepon </td>
+                                <td> :</td>
+                                <td><?php echo $hasil['no_tlp']; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Tanggal Sewa </td>
+                                <td> :</td>
+                                <td><?php echo $hasil['tanggal']; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Lama Sewa </td>
+                                <td> :</td>
+                                <td><?php echo $hasil['lama_sewa']; ?> hari</td>
+                            </tr>
+                            <tr>
+                                <td>Total Harga </td>
+                                <td> :</td>
+                                <td>Rp. <?php echo number_format($hasil['total_harga']); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Status </td>
+                                <td> :</td>
+                                <td>
+                                    <select class="form-control" name="status">
+                                        <option <?php if ($hasil['konfirmasi_pembayaran'] == 'Sedang di proses') {
+                                            echo 'selected';
+                                        } ?>>
+                                            Sedang di proses
+                                        </option>
+                                        <option <?php if ($hasil['konfirmasi_pembayaran'] == 'Pembayaran di terima') {
+                                            echo 'selected';
+                                        } ?>>
+                                            Pembayaran di terima
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" name="id_booking" value="<?php echo $hasil['id_booking']; ?>">
+                        <button type="submit" class="btn btn-primary float-right">
+                            Ubah Status
+                        </button>
+                    </form>
 
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div>
 <br>
 <br>
 <br>
 
-<?php include '../footer.php';?>
+<?php include '../footer.php'; ?>
