@@ -1,5 +1,5 @@
 <?php
-require '../koneksi/koneksi.php';
+require_once '../koneksi/koneksi.php';
 $title_web = 'Settings';
 include 'header.php';
 if(empty($_SESSION['USER'])) {
@@ -24,7 +24,7 @@ if(!empty($_POST['nama_rental'])) {
         showConfirmButton: false,
         timer: 1500
         }).then(function() {
-            window.reload();
+            window.location.href = "settings.php";
             });
             </script>';
         }
@@ -145,7 +145,6 @@ if(!empty($_POST['nama_rental'])) {
                     }
                     formWebsite.classList.add('was-validated');
                 });
-
 
             });
         </script>
