@@ -783,17 +783,17 @@
         }
 
         switch (event.which) {
-          case ARROW_LEFT_KEYCODE:
-            event.preventDefault();
-            this.prev();
-            break;
+        case ARROW_LEFT_KEYCODE:
+          event.preventDefault();
+          this.prev();
+          break;
 
-          case ARROW_RIGHT_KEYCODE:
-            event.preventDefault();
-            this.next();
-            break;
+        case ARROW_RIGHT_KEYCODE:
+          event.preventDefault();
+          this.next();
+          break;
 
-          default:
+        default:
         }
       };
 
@@ -1541,19 +1541,19 @@
     }
 
     switch (element.nodeName) {
-      case 'HTML':
-      case 'BODY':
-        return element.ownerDocument.body;
-      case '#document':
-        return element.body;
+    case 'HTML':
+    case 'BODY':
+      return element.ownerDocument.body;
+    case '#document':
+      return element.body;
     }
 
     // Firefox want us to check `-x` and `-y` variations as well
 
     var _getStyleComputedProp = getStyleComputedProperty(element),
-        overflow = _getStyleComputedProp.overflow,
-        overflowX = _getStyleComputedProp.overflowX,
-        overflowY = _getStyleComputedProp.overflowY;
+    overflow = _getStyleComputedProp.overflow,
+    overflowX = _getStyleComputedProp.overflowX,
+    overflowY = _getStyleComputedProp.overflowY;
 
     if (/(auto|scroll|overlay)/.test(overflow + overflowY + overflowX)) {
       return element;
@@ -2043,8 +2043,8 @@
       // In case of HTML, we need a different computation
       if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
         var _getWindowSizes = getWindowSizes(),
-            height = _getWindowSizes.height,
-            width = _getWindowSizes.width;
+        height = _getWindowSizes.height,
+        width = _getWindowSizes.width;
 
         boundaries.top += offsets.top - offsets.marginTop;
         boundaries.bottom = height + offsets.top;
@@ -2067,7 +2067,7 @@
 
   function getArea(_ref) {
     var width = _ref.width,
-        height = _ref.height;
+    height = _ref.height;
 
     return width * height;
   }
@@ -2121,7 +2121,7 @@
 
     var filteredAreas = sortedAreas.filter(function (_ref2) {
       var width = _ref2.width,
-          height = _ref2.height;
+      height = _ref2.height;
       return width >= popper.clientWidth && height >= popper.clientHeight;
     });
 
@@ -2358,7 +2358,7 @@
   function isModifierEnabled(modifiers, modifierName) {
     return modifiers.some(function (_ref) {
       var name = _ref.name,
-          enabled = _ref.enabled;
+      enabled = _ref.enabled;
       return enabled && name === modifierName;
     });
   }
@@ -2618,7 +2618,7 @@
    */
   function computeStyle(data, options) {
     var x = options.x,
-        y = options.y;
+    y = options.y;
     var popper = data.offsets.popper;
 
     // Remove this legacy support in Popper.js v2
@@ -2667,7 +2667,7 @@
     // `x` to `top` to make the popper grow towards its top instead of
     // its bottom.
     var left = void 0,
-        top = void 0;
+    top = void 0;
     if (sideA === 'bottom') {
       top = -offsetParentRect.height + offsets.bottom;
     } else {
@@ -2769,8 +2769,8 @@
 
     var placement = data.placement.split('-')[0];
     var _data$offsets = data.offsets,
-        popper = _data$offsets.popper,
-        reference = _data$offsets.reference;
+    popper = _data$offsets.popper,
+    reference = _data$offsets.reference;
 
     var isVertical = ['left', 'right'].indexOf(placement) !== -1;
 
@@ -2918,17 +2918,17 @@
     var flipOrder = [];
 
     switch (options.behavior) {
-      case BEHAVIORS.FLIP:
-        flipOrder = [placement, placementOpposite];
-        break;
-      case BEHAVIORS.CLOCKWISE:
-        flipOrder = clockwise(placement);
-        break;
-      case BEHAVIORS.COUNTERCLOCKWISE:
-        flipOrder = clockwise(placement, true);
-        break;
-      default:
-        flipOrder = options.behavior;
+    case BEHAVIORS.FLIP:
+      flipOrder = [placement, placementOpposite];
+      break;
+    case BEHAVIORS.CLOCKWISE:
+      flipOrder = clockwise(placement);
+      break;
+    case BEHAVIORS.COUNTERCLOCKWISE:
+      flipOrder = clockwise(placement, true);
+      break;
+    default:
+      flipOrder = options.behavior;
     }
 
     flipOrder.forEach(function (step, index) {
@@ -2990,8 +2990,8 @@
    */
   function keepTogether(data) {
     var _data$offsets = data.offsets,
-        popper = _data$offsets.popper,
-        reference = _data$offsets.reference;
+    popper = _data$offsets.popper,
+    reference = _data$offsets.reference;
 
     var placement = data.placement.split('-')[0];
     var floor = Math.floor;
@@ -3036,13 +3036,13 @@
     if (unit.indexOf('%') === 0) {
       var element = void 0;
       switch (unit) {
-        case '%p':
-          element = popperOffsets;
-          break;
-        case '%':
-        case '%r':
-        default:
-          element = referenceOffsets;
+      case '%p':
+        element = popperOffsets;
+        break;
+      case '%':
+      case '%r':
+      default:
+        element = referenceOffsets;
       }
 
       var rect = getClientRect(element);
@@ -3153,9 +3153,9 @@
   function offset(data, _ref) {
     var offset = _ref.offset;
     var placement = data.placement,
-        _data$offsets = data.offsets,
-        popper = _data$offsets.popper,
-        reference = _data$offsets.reference;
+    _data$offsets = data.offsets,
+    popper = _data$offsets.popper,
+    reference = _data$offsets.reference;
 
     var basePlacement = placement.split('-')[0];
 
@@ -3207,8 +3207,8 @@
     var transformProp = getSupportedPropertyName('transform');
     var popperStyles = data.instance.popper.style; // assignment to help minification
     var top = popperStyles.top,
-        left = popperStyles.left,
-        transform = popperStyles[transformProp];
+    left = popperStyles.left,
+    transform = popperStyles[transformProp];
 
     popperStyles.top = '';
     popperStyles.left = '';
@@ -3270,8 +3270,8 @@
     // if shift shiftvariation is specified, run the modifier
     if (shiftvariation) {
       var _data$offsets = data.offsets,
-          reference = _data$offsets.reference,
-          popper = _data$offsets.popper;
+      reference = _data$offsets.reference,
+      popper = _data$offsets.popper;
 
       var isVertical = ['bottom', 'top'].indexOf(basePlacement) !== -1;
       var side = isVertical ? 'left' : 'top';
@@ -3337,8 +3337,8 @@
     var placement = data.placement;
     var basePlacement = placement.split('-')[0];
     var _data$offsets = data.offsets,
-        popper = _data$offsets.popper,
-        reference = _data$offsets.reference;
+    popper = _data$offsets.popper,
+    reference = _data$offsets.reference;
 
     var isHoriz = ['left', 'right'].indexOf(basePlacement) !== -1;
 
@@ -4067,7 +4067,7 @@
            * Popper - https://popper.js.org
            */
           if (typeof Popper === 'undefined') {
-            throw new TypeError('Bootstrap dropdown require Popper.js (https://popper.js.org)');
+            throw new TypeError('Bootstrap dropdown require_once Popper.js (https://popper.js.org)');
           }
 
           var referenceElement = this._element;
@@ -5089,7 +5089,7 @@
          * Popper - https://popper.js.org
          */
         if (typeof Popper === 'undefined') {
-          throw new TypeError('Bootstrap tooltips require Popper.js (https://popper.js.org)');
+          throw new TypeError('Bootstrap tooltips require_once Popper.js (https://popper.js.org)');
         } // private
 
 
