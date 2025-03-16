@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'koneksi/koneksi.php';
+require_once 'koneksi/koneksi.php';
 include 'header.php';
 
 // Persiapkan query dengan prepared statement untuk mencegah SQL injection
