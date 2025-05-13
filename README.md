@@ -1,5 +1,5 @@
 
-## Fitur-fitur pada Aplikasi pada kali ini :
+## Fitur-fitur pada Aplikasi pada kali ini:
 
 Login & Daftar Akun
 - Modul Mobil
